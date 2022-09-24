@@ -26,10 +26,26 @@
   </form>
   <div class="container">
     <div class="gallery"></div>
-    <button type="button" class="load-more is-hidden">Load more</button>
-    <p class="end-collection-text is-hidden">
+    <!-- <button type="button" class="load-more is-hidden">Load more</button> -->
+    <button
+    type="button"
+    class="load-more is-hidden"
+    data-action="load-more"
+  >
+    <span
+      class="spinner-border spinner-border-sm spinner is-hidden"
+      role="status"
+      aria-hidden="true"
+    ></span>
+
+    <span class="label">Load more</span>
+  </button>
+
+
+
+    <!-- <p class="end-collection-text is-hidden">
       We're sorry, but you've reached the end of search results.
-    </p>
+    </p> -->
   </div>
 
   <script src="index.js" type="module"></script>

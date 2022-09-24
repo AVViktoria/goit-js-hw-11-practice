@@ -1,19 +1,3 @@
-
-
-// async function onClickLoadMoreBtn() {
-//   currentPage += 1;
-//   const response = await fetchImages(searchQuery, currentPage);
-//   renderCardImage(response.hits);
-//   lightbox.refresh();
-//   currentHits += response.hits.length;
-
-//   if (currentHits === response.totalHits) {
-//     refs.loadMoreBtn.classList.add('is-hidden');
-//     refs.endCollectionText.classList.remove('is-hidden');
-//   }}
- 
-//   export { onClickLoadMoreBtn };
-
 // export default class LoadMoreBtn {
 //   constructor({ selector, hidden = false }) {
 //     this.refs = this.getRefs(selector);

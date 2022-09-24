@@ -39,21 +39,16 @@ export default class NewsApiService {
     const BASE_URL = 'https://pixabay.com/api/';
     const url = `${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${this.page}`;
 
-    fetch(url)
-      .then(r => r.json())
-      .then(data => {
-        this.incrementPage();
-        // console.log(this.page);
-        // console.log(this);
-      });
+    return fetch(url)
+      .then(response => response.json())
+      .then(({ articles }) => {
+          this.incrementPage();
+          return articles;
+        });
+      }
+  
 
-    //     return fetch(url, options)
-    //       .then(response => response.json())
-    //       .then(({ articles }) => {
-    //         this.incrementPage();
-    //         return articles;
-    //       });
-  }
+  //       
 
   incrementPage() {
     this.page += 1;

@@ -41,10 +41,16 @@ export default class NewsApiService {
 
     return fetch(url)
       .then(response => response.json())
-      .then(({ articles }) => {
-          this.incrementPage();
-          return articles;
-        });
+      .then(data => {
+            this.incrementPage();
+            return data.hits;
+          });
+
+
+      // .then(({ articles }) => {
+      //     this.incrementPage();
+      //     return articles;
+      //   });
       }
   
 

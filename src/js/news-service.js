@@ -15,11 +15,25 @@ export default class NewsApiService {
 
     return fetch(url)
       .then(response => response.json())
+      
      .then(({ hits }) => {
           this.incrementPage();
           return hits;
-        });
-      }
+        })
+
+
+
+
+        
+
+
+
+        }
+
+
+
+
+
 //*  увеличиваем страницу на 1
   incrementPage() {
     this.page += 1;

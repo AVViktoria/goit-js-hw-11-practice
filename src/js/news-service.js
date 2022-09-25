@@ -1,3 +1,45 @@
+//* данные ключа и url c сайта pixabay
+const API_KEY = '30114983-364137b9a9ec33f130a531f95';
+    const BASE_URL = 'https://pixabay.com/api/';
+export default class NewsApiService {
+  
+  //*     Хранение терминов запроса
+  constructor() {
+    this.searchQuery = '';
+    this.page = 1;
+  }
+//* забирает hits с помощью url и возвращает hits
+  fetchHits() {
+    
+    const url = `${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&per_page=5&page=${this.page}`;
+
+    return fetch(url)
+      .then(response => response.json())
+     .then(({ hits }) => {
+          this.incrementPage();
+          return hits;
+        });
+      }
+//*  увеличиваем страницу на 1
+  incrementPage() {
+    this.page += 1;
+  }
+
+//*  сбрасываем номера страниц
+  resetPage() {
+    this.page = 1;
+  }
+//*  получить
+  get query() {
+    return this.searchQuery;
+  }
+//*  записать
+  set query(newQuery) {
+    this.searchQuery = newQuery;
+  }
+}
+
+
 // import axios from 'axios';
 
 // const API_KEY = '30114983-364137b9a9ec33f130a531f95';
@@ -27,48 +69,3 @@
 
 //   return await axios.get(`${url}${filter}`).then(response => response.data);
 // }
-
-export default class NewsApiService {
-  constructor() {
-    this.searchQuery = '';
-    this.page = 1;
-  }
-
-  fetchArticles() {
-    const API_KEY = '30114983-364137b9a9ec33f130a531f95';
-    const BASE_URL = 'https://pixabay.com/api/';
-    const url = `${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${this.page}`;
-
-    return fetch(url)
-      .then(response => response.json())
-      .then(data => {
-            this.incrementPage();
-            return data.hits;
-          });
-
-
-      // .then(({ articles }) => {
-      //     this.incrementPage();
-      //     return articles;
-      //   });
-      }
-  
-
-  //       
-
-  incrementPage() {
-    this.page += 1;
-  }
-
-  resetPage() {
-    this.page = 1;
-  }
-
-  get query() {
-    return this.searchQuery;
-  }
-
-  set query(newQuery) {
-    this.searchQuery = newQuery;
-  }
-}

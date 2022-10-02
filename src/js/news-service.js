@@ -1,3 +1,10 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Notify } from 'notiflix';
+import LoadMoreBtn from './load-more-btn';
+
+
+// const loadMoreBtn = new LoadMoreBtn();
+        
 //* данные ключа и url c сайта pixabay
 const API_KEY = '30114983-364137b9a9ec33f130a531f95';
     const BASE_URL = 'https://pixabay.com/api/';
@@ -15,24 +22,27 @@ export default class NewsApiService {
 
     return fetch(url)
       .then(response => response.json())
-      
-     .then(({ hits }) => {
-          this.incrementPage();
-          return hits;
-        })
 
-
-
+      .then(({ hits }) => {
+        this.incrementPage();
 
         
+        if (hits.length === 0) { 
+          // loadMoreBtn.hide();
+          Notify.warning('Sorry, there are no images matching your search query. Please try again.');
+          return;
+        }
+        if(hits === hits.totalHits ){
+          return Notify.warning( "We're sorry, but you've reached the end of search results.")
+        }
+        ;
+        Notify.success(`Hooray! We found ${hits.length} images.`)
+        return hits;
+      });   
 
 
 
         }
-
-
-
-
 
 //*  увеличиваем страницу на 1
   incrementPage() {

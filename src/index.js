@@ -25,7 +25,7 @@ const loadMoreBtn = new LoadMoreBtn({
 const newsApiService = new NewsApiService();
 
 refs.searchForm.addEventListener('submit', onSearch);
-loadMoreBtn.refs.button.addEventListener('click', fetchHits);
+loadMoreBtn.refs.button.addEventListener('click', onLoadMore);
 
 async function onSearch(e) {
   e.preventDefault();
@@ -35,9 +35,11 @@ async function onSearch(e) {
   loadMoreBtn.show();
   newsApiService.resetPage();
   clearHitsContainer();
-  fetchHits();
-}
+  fetchHits()
 
+    }
+    
+  
 //*  содержит общий код
 //*  при вызове кнопка неактивная, делаем API запрос рисуем и включаем кнопку обратно
 function fetchHits() {
@@ -48,10 +50,9 @@ function fetchHits() {
       appendHitsMarkup(hits);
       loadMoreBtn.enable();
     })
-    // .then(hits => { if (hits.length ===0){
-    //   loadMoreBtn.hide();
-    //   Notify.failure('Sorry, there are no images matching your search query. Please try again.');
-    // }})
+  }
+
+    // 
 
 
 // const response =  fetchHits(newsApiService.query);
@@ -62,7 +63,14 @@ function fetchHits() {
   //   console.log(response.totalHits)
   //   return Notify.failure("Sorry, there are no images matching your search query. Please try again.");
   // }
-}
+
+
+function onLoadMore() {
+  fetchHits()
+  }
+
+
+
 
 function appendHitsMarkup(hits) {
   refs.gallery.insertAdjacentHTML('beforeend', cardTemplate(hits));
